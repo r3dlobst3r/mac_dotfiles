@@ -4,6 +4,13 @@
 
 vim.opt.winbar = "%=%m %f"
 vim.opt.colorcolumn = "80"
+vim.opt.scrolloff = 10
+vim.opt.incsearch = true
+
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+vim.keymap.set("x", "<leader>p", "\"_dP")
 
 if vim.g.neovide then
   vim.o.guifont = "JetBrainsMono Nerd Font:h19"

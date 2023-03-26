@@ -8,6 +8,7 @@ return {
     },
     on_highlights = function (highlights, colors)
       highlights.LineNr = { fg = "#bbbbbb" }
+      highlights.ColorColumn = { bg = "#BBBBBF" }
     end
   },
 }
