@@ -1,3 +1,3 @@
 function fish_greeting
-fortune | cowthink -w
+fortune -s | cowthink -w
 end
