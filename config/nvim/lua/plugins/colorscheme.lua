@@ -5,7 +5,7 @@ vim.g.material_style = "palenight"
 -- vim.g.material_style = "darker"
 
 return {
-  { "ellisonleao/gruvbox.nvim" },
+  { "ellisonleao/gruvbox.nvim", priority = 1000 },
   { "EdenEast/nightfox.nvim" },
   { "marko-cerovac/material.nvim" },
   {
@@ -14,6 +14,13 @@ return {
     opts = {
       flavour = "mocha",
       transparent_background = true,
+      custom_highlights = function (colors)
+        return {
+          LineNr = {
+            fg = colors.pink
+          }
+        }
+      end,
       integrations = {
         cmp = true,
         gitsigns = true,
@@ -23,9 +30,11 @@ return {
         mini = true,
         leap = true,
         dashboard = true,
+        markdown = true,
         mason = true,
         noice = true,
         which_key = true,
+        illuminate = true,
       },
     },
   },
