@@ -3,7 +3,7 @@
 -- Add any additional options here
 
 vim.opt.winbar = "%=%m %f"
-vim.opt.colorcolumn = "80"
+-- vim.opt.colorcolumn = "80"
 vim.opt.scrolloff = 10
 vim.opt.incsearch = true
 
@@ -16,8 +16,17 @@ if vim.g.neovide then
   vim.o.guifont = "JetBrainsMono Nerd Font:h19"
 end
 
+-- Disable arrow keys
 for _, mode in pairs({ 'n', 'i', 'v', 'x' }) do
     for _, key in pairs({ '<Up>', '<Down>', '<Left>', '<Right>' }) do
         vim.keymap.set(mode, key, '<nop>')
     end
 end
+
+vim.cmd
+[[
+    augroup change_cursor
+        au!
+        au ExitPre * :set guicursor=a:ver90
+    augroup END
+]]
