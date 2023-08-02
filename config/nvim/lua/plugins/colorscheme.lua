@@ -45,8 +45,8 @@ return {
     opts = {
       transparent = false,
       styles = {
-        sidebars = "transparent",
-        floats = "transparent",
+        -- sidebars = "transparent",
+        -- floats = "transparent",
       },
       on_highlights = function(highlights, _)
         highlights.LineNr = { fg = "#bbbbbb" }
@@ -58,7 +58,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "tokyonight",
     },
   },
 }
