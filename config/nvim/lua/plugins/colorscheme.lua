@@ -13,7 +13,7 @@ return {
     name = "catppuccin",
     opts = {
       flavour = "mocha",
-      -- transparent_background = true,
+      transparent_background = true,
       custom_highlights = function (colors)
         return {
           LineNr = {
@@ -58,7 +58,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight",
+      colorscheme = "catppuccin",
     },
   },
 }
