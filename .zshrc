@@ -105,9 +105,6 @@ config status
 # On-demand rehash
 zshcache_time="$(date +%s%N)"
 
-autoload -Uz add-zsh-hook
-add-zsh-hook -Uz precmd rehash_precmd
-
 # ls
 alias l='ls -lh'
 alias ll='ls -lah'
