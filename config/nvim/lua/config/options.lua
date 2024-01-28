@@ -30,3 +30,5 @@ vim.cmd
         au ExitPre * :set guicursor=a:ver90
     augroup END
 ]]
+
+vim.g.autoformat = false
