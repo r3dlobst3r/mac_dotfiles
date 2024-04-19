@@ -38,6 +38,12 @@ set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
 set -g fish_pager_color_selected_background --background=$selection
 
+# FZF bindings
+fzf_configure_bindings --directory=\c]
+fzf_configure_bindings --git_log=\ci
+fzf_configure_bindings --git_status=\co
+fzf_configure_bindings --processes=\cp
+
 starship init fish | source
 
 # bun
