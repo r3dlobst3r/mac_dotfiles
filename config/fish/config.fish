@@ -39,10 +39,11 @@ set -g fish_pager_color_description $comment
 set -g fish_pager_color_selected_background --background=$selection
 
 starship init fish | source
+enable_transience
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
 # FZF bindings
-fzf_configure_bindings --directory=\c] --git_log=\ci --git_status=\co --processes=\cp
+fzf_configure_bindings --directory=\c] --git_log= --git_status=\co --processes=\cp
