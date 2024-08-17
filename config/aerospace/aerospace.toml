@@ -57,7 +57,7 @@ inner.horizontal = 10
 inner.vertical =   10
 outer.left =       10
 outer.bottom =     10
-outer.top =        33
+outer.top =        10
 outer.right =      10
 
 # 'main' binding mode declaration
@@ -119,6 +119,11 @@ alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
+alt-t = 'workspace T'
+alt-b = 'workspace B'
+alt-c = 'workspace C'
+alt-s = 'workspace S'
+alt-w = 'workspace W'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
@@ -130,6 +135,11 @@ alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
 alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
 alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
 alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+alt-shift-t = ['move-node-to-workspace T']
+alt-shift-b = ['move-node-to-workspace B']
+alt-shift-c = ['move-node-to-workspace C']
+alt-shift-s = ['move-node-to-workspace S']
+alt-shift-w = ['move-node-to-workspace W']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -156,16 +166,24 @@ alt-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
 if.app-id = 'so.amie.electron-app'
-run = "move-node-to-workspace 1"
+run = "move-node-to-workspace C"
 
 [[on-window-detected]]
 if.app-id = 'com.googlecode.iterm2'
-run = "move-node-to-workspace 2"
+run = "move-node-to-workspace T"
 
 [[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
-run = "move-node-to-workspace 3"
+run = "move-node-to-workspace B"
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = "move-node-to-workspace 4"
+run = "move-node-to-workspace S"
+
+[[on-window-detected]]
+if.app-id = 'net.whatsapp.WhatsApp'
+run = "move-node-to-workspace W"
+
+[[on-window-detected]]
+if.app-id = 'ru.keepcoder.Telegram'
+run = "move-node-to-workspace W"
