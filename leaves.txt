@@ -9,6 +9,7 @@ coreutils
 cowsay
 elixir
 fd
+ffmpegthumbnailer
 fish
 fortune
 fzf
@@ -34,6 +35,7 @@ node@16
 octave
 openjdk
 pass-otp
+poppler
 portal
 postgresql@14
 pyqt@5
@@ -41,6 +43,7 @@ python@3.11
 railwayapp/railway/railway
 rbenv
 ruby
+sevenzip
 sl
 slides
 smartmontools
@@ -56,5 +59,7 @@ wget
 xclip
 xwmx/taps/nb
 yarn
+yazi
 yq
 z
+zoxide
