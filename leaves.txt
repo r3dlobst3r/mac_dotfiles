@@ -26,6 +26,7 @@ htop
 jq
 julien-cpsn/atac/atac
 lazygit
+mkcert
 mongodb/brew/mongodb-community
 mysql
 neofetch
@@ -61,5 +62,4 @@ xwmx/taps/nb
 yarn
 yazi
 yq
-z
 zoxide

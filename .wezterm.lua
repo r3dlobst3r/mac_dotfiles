@@ -2,22 +2,44 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-config.font = wezterm.font({
-	family = "JetBrainsMono Nerd Font",
-	weight = "DemiBold",
-})
+config = {
+	font = wezterm.font({
+		family = "JetBrainsMono Nerd Font",
+		weight = "DemiBold",
+	}),
 
-config.font_size = 16
+	font_size = 16,
 
-config.enable_tab_bar = false
+	enable_tab_bar = false,
 
-config.window_decorations = "RESIZE"
-config.custom_block_glyphs = true
-config.anti_alias_custom_block_glyphs = true
+	window_decorations = "RESIZE",
+	custom_block_glyphs = true,
+	anti_alias_custom_block_glyphs = true,
 
-config.color_scheme = "Catppuccin Mocha"
+	color_scheme = "Catppuccin Mocha",
 
-config.window_background_opacity = 0.85
-config.macos_window_background_blur = 10
+	window_background_opacity = 1,
+	-- macos_window_background_blur = 10,
+
+	default_cursor_style = "BlinkingBar",
+
+  background = {
+    {
+      source = {
+        File = "/Users/manishprivet/.dotfiles/wallpapers/4.jpg"
+      },
+      width = "100%",
+      height = "100%",
+    },
+    {
+      source = {
+        Color = "#1e1e2e"
+      },
+      width = "100%",
+      height = "100%",
+      opacity = 0.91,
+    }
+  }
+}
 
 return config
