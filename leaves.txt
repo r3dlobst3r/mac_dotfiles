@@ -26,6 +26,8 @@ htop
 jq
 julien-cpsn/atac/atac
 lazygit
+mailsy
+mas
 mkcert
 mongodb/brew/mongodb-community
 mysql
@@ -50,6 +52,8 @@ slides
 smartmontools
 sshs
 starship
+stow
+taskell
 tbb
 teamookla/speedtest/speedtest
 telnet
@@ -62,4 +66,5 @@ xwmx/taps/nb
 yarn
 yazi
 yq
+yt-dlp
 zoxide
