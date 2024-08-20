@@ -1,4 +1,3 @@
 #!/bin/bash
 
-rm ./leaves.txt
-brew leaves >> leaves.txt
+brew bundle dump --global --force

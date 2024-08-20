@@ -4,7 +4,7 @@
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install all Homebrew packages
-xargs brew install < .leaves.txt
+brew bundle --file .Brewfile
 
 # Install all fish packages
 chmod +x ./scripts/fish.sh
