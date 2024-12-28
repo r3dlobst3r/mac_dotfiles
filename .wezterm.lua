@@ -26,7 +26,7 @@ config = {
   background = {
     {
       source = {
-        File = "/Users/manishprivet/.dotfiles/wallpapers/4.jpg"
+        File = "/Users/manish.kumar/.dotfiles/wallpapers/8.jpg"
       },
       width = "100%",
       height = "100%",
@@ -37,7 +37,7 @@ config = {
       },
       width = "100%",
       height = "100%",
-      opacity = 0.91,
+      opacity = 0.75,
     }
   }
 }
