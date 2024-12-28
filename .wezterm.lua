@@ -26,7 +26,7 @@ config = {
   background = {
     {
       source = {
-        File = "/Users/manish.kumar/.dotfiles/wallpapers/8.jpg"
+        File = wezterm.home_dir .. "/.dotfiles/wallpapers/8.jpg"
       },
       width = "100%",
       height = "100%",

@@ -54,6 +54,10 @@ eval "$(direnv hook fish)"
 eval "$(goenv init -)"
 eval "$(nodenv init -)"
 
+set -g Z_DATA $HOME/\x2elocal/share/z/data
+set -g Z_DATA_DIR $HOME/\x2elocal/share/z
+set -g Z_EXCLUDE \x5e$HOME\x24
+
 alias tailscale /Applications/Tailscale.app/Contents/MacOS/Tailscale
 
 # The next line updates PATH for the Google Cloud SDK.
