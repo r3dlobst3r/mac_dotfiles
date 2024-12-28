@@ -4,7 +4,6 @@ command_timeout = 150
 [character]
 success_symbol = "[✔ ](fg:#7dcfff)"
 error_symbol = "[𝕏 ](gray)"
-vicmd_symbol = "[ ](purple)"
 
 [git_state]
 disabled=false

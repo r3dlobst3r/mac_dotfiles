@@ -1,0 +1,15 @@
+theme = catppuccin-mocha
+
+background = 282c34
+foreground= ffffff
+
+background-opacity = 0.9
+background-blur-radius = 10
+
+window-decoration = false
+
+font-family = JetBrainsMono Nerd Font
+font-size = 15
+
+clipboard-read = allow
+clipboard-write = allow
