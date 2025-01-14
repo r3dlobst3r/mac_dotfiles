@@ -57,4 +57,4 @@ eval "$(nodenv init -)"
 # alias tailscale /Applications/Tailscale.app/Contents/MacOS/Tailscale
 
 # The next line updates PATH for the Google Cloud SDK.
-# if [ -f '/Users/manish.kumar/google-cloud-sdk/path.fish.inc' ]; . '/Users/manish.kumar/google-cloud-sdk/path.fish.inc'; end
+if [ -f '/Users/manishprivet/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/manishprivet/Downloads/google-cloud-sdk/path.fish.inc'; end
