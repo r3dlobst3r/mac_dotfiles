@@ -1,9 +1,9 @@
-theme = catppuccin-mocha
+theme = GruvboxDark
 
-background = 282c34
-foreground= ffffff
+# background = 282c34
+# foreground= ffffff
 
-background-opacity = 0.9
+background-opacity = 0.95
 background-blur-radius = 10
 
 window-decoration = false

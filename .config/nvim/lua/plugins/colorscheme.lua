@@ -5,7 +5,9 @@ vim.g.material_style = "palenight"
 -- vim.g.material_style = "darker"
 
 return {
-  { "ellisonleao/gruvbox.nvim", priority = 1000 },
+  { "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = {
+    transparent_mode = true
+  } },
   { "EdenEast/nightfox.nvim" },
   { "marko-cerovac/material.nvim" },
   {
@@ -58,7 +60,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "gruvbox",
     },
   },
 }
