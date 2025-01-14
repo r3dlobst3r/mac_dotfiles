@@ -173,7 +173,7 @@ if.app-id = 'so.amie.electron-app'
 run = "move-node-to-workspace C"
 
 [[on-window-detected]]
-if.app-id = 'com.googlecode.iterm2'
+if.app-id = 'com.mitchellh.ghostty'
 run = "move-node-to-workspace T"
 
 [[on-window-detected]]

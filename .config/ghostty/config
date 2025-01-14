@@ -7,6 +7,7 @@ background-opacity = 0.9
 background-blur-radius = 10
 
 window-decoration = false
+macos-titlebar-style = hidden
 
 font-family = JetBrainsMono Nerd Font
 font-size = 15
