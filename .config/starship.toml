@@ -55,7 +55,6 @@ time_format = "%R" # Hour:Minute Format
 
 [aws]
 disabled = true
-symbol = "  "
 
 [buf]
 symbol = " "
@@ -200,3 +199,12 @@ symbol = " "
 
 [zig]
 symbol = " "
+
+# ~/.config/starship.toml
+
+[shell]
+fish_indicator = '󰈺 '
+powershell_indicator = '_'
+unknown_indicator = 'mystery shell'
+style = 'cyan bold'
+disabled = false
