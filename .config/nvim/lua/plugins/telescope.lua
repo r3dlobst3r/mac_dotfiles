@@ -4,7 +4,7 @@ return {
     return {
       pickers = {
         find_files = {
-          find_command = { "rg", "--files", "--hidden", "--color", "never", "-g", "!.git" },
+          find_command = { "rg", "--files", "--hidden", "-i", "--color", "never", "-g", "!.git" },
           hidden = true,
         },
         grep_string = {

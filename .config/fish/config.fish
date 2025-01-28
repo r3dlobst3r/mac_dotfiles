@@ -51,10 +51,10 @@ zoxide init fish | source
 fzf_configure_bindings --directory=\c] --git_log= --git_status=\co --processes=\cp
 # 
 eval "$(direnv hook fish)"
-eval "$(goenv init -)"
-eval "$(nodenv init -)"
 # 
 # alias tailscale /Applications/Tailscale.app/Contents/MacOS/Tailscale
+
+abbr --add gitp git push -u origin HEAD
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/manishprivet/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/manishprivet/Downloads/google-cloud-sdk/path.fish.inc'; end

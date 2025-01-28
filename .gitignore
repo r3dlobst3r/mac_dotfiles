@@ -1,4 +1,5 @@
 .config/fish/fishd.tmp*
 .config/github-copilot/
 .config/gcloud/
+.config/configstore/
 .DS_Store
