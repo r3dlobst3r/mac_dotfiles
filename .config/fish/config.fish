@@ -39,20 +39,20 @@ set -g fish_pager_color_description $comment
 set -g fish_pager_color_selected_background --background=$selection
 
 starship init fish | source
-# # enable_transience
-# 
+enable_transience
+
 zoxide init fish | source
-# 
-# # bun
+
+# bun
 # set --export BUN_INSTALL "$HOME/.bun"
 # set --export PATH $BUN_INSTALL/bin $PATH
-# 
-# # FZF bindings
+
+# FZF bindings
 fzf_configure_bindings --directory=\c] --git_log= --git_status=\co --processes=\cp
-# 
+
 eval "$(direnv hook fish)"
-# 
-# alias tailscale /Applications/Tailscale.app/Contents/MacOS/Tailscale
+
+alias tailscale /Applications/Tailscale.app/Contents/MacOS/Tailscale
 
 abbr --add gitp git push -u origin HEAD
 
