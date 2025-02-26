@@ -58,3 +58,10 @@ abbr --add gitp git push -u origin HEAD
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/manishprivet/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/manishprivet/Downloads/google-cloud-sdk/path.fish.inc'; end
+
+# pnpm
+set -gx PNPM_HOME "/Users/manishprivet/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
