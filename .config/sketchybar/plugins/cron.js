@@ -50,7 +50,9 @@ const SKETCHYBAR_COMMAND = `sketchybar --set ${ITEM_NAME} \
 
 execute(SKETCHYBAR_COMMAND);
 
-const JSON_EXPORT_COMMAND = `dfindexeddb db \
+const python = execute("python3 -m site --user-base").toString().trim();
+
+const JSON_EXPORT_COMMAND = `${python}/bin/dfindexeddb db \
   -s "${INDEXDB_LOCATION}/https_calendar.notion.so_0.indexeddb.leveldb" \
   --format chrome \
   --use_manifest \
