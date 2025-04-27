@@ -1,14 +1,13 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export EDITOR:nvim
-SETUVAR --export OPENAI_API_KEY:sk\x2dproj\x2dOc_8VvqyabS9WXNkSxWS\x2dnVIw_WodunU8SXlVSLtTG\x2d_r_gK_2EEp4zrKUi1gOdsc_\x2dtQehMr_T3BlbkFJyqGSo6cR8gX\x2dUC3C4ND7pEQVpwSMc9\x2d01dMGXwHv6oIXdez2cE4wzeF1xwASyRWXncXGx8dvgA
 SETUVAR --export PROVIDER:ollama
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
 SETUVAR Z_DATA:/Users/manishprivet/\x2elocal/share/z/data
 SETUVAR Z_DATA_DIR:/Users/manishprivet/\x2elocal/share/z
 SETUVAR Z_EXCLUDE:\x5e/Users/manishprivet\x24
-SETUVAR __fish_initialized:3800
+SETUVAR __fish_initialized:3400
 SETUVAR _fisher_jorgebucaran_2F_nvm_2E_fish_files:\x7e/\x2econfig/fish/functions/_nvm_index_update\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_list\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_version_activate\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_version_deactivate\x2efish\x1e\x7e/\x2econfig/fish/functions/nvm\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/nvm\x2efish\x1e\x7e/\x2econfig/fish/completions/nvm\x2efish
 SETUVAR _fisher_plugins:jorgebucaran/nvm\x2efish
 SETUVAR _fisher_upgraded_to_4_4:\x1d
