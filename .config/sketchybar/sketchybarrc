@@ -1,0 +1,52 @@
+#!/bin/bash
+
+export PLUGIN_DIR="$CONFIG_DIR/plugins"
+export ITEM_DIR="$CONFIG_DIR/items"
+
+source "$CONFIG_DIR/colors.sh" # Loads all defined colors
+
+sketchybar --bar \
+  position=top \
+  height=40 \
+  blur_radius=30 \
+  color=$BAR_COLOR
+
+default=(
+  padding_left=5
+  padding_right=5
+  icon.font="Hack Nerd Font:Bold:17.0"
+  label.font="Hack Nerd Font:Bold:14.0"
+  icon.color="$WHITE"
+  label.color="$WHITE"
+  icon.padding_left=4
+  icon.padding_right=4
+  label.padding_left=4
+  label.padding_right=4
+  background.color="$ITEM_BG_COLOR"
+  background.corner_radius=5
+  background.height=24
+  background.drawing=off
+)
+sketchybar --default "${default[@]}"
+
+# Aerospace
+sketchybar --add event aerospace_workspace_change
+
+source "$ITEM_DIR/spaces.sh"
+source "$ITEM_DIR/front_app.sh"
+
+source "$ITEM_DIR/media.sh"
+
+source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/volume.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/cpu.sh"
+
+sketchybar --update
+
+for sid in $(aerospace list-workspaces --focused); do
+  sketchybar --set space."$sid" background.drawing=on \
+    background.color="$ACCENT_COLOR" \
+    label.color="$BACKGROUND" \
+    icon.color="$BACKGROUND"
+done
