@@ -7,7 +7,7 @@ for sid in $(aerospace list-workspaces --all); do
   fi
 
   sketchybar --add item space."$sid" left \
-    --subscribe space."$sid" aerospace_workspace_change display_change system_woke \
+    --subscribe space."$sid" aerospace_workspace_change display_change system_woke mouse.entered mouse.exited \
     --set space."$sid" \
     display="$monitor" \
     padding_right=0 \
