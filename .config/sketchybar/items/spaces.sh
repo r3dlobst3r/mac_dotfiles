@@ -1,9 +1,15 @@
 #!/bin/bash
-
 for sid in $(aerospace list-workspaces --all); do
+  monitor=$(aerospace list-windows --workspace "$sid" --format "%{monitor-appkit-nsscreen-screens-id}")
+
+  if [ -z "$monitor" ]; then
+    monitor="1"
+  fi
+
   sketchybar --add item space."$sid" left \
-    --subscribe space."$sid" aerospace_workspace_change \
+    --subscribe space."$sid" aerospace_workspace_change display_change system_woke \
     --set space."$sid" \
+    display="$monitor" \
     padding_right=0 \
     icon="$sid" \
     label.padding_right=7 \

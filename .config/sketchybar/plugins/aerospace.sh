@@ -24,13 +24,19 @@ for sid in $(aerospace list-windows --workspace "$1" --json | jq -r "map ( .\"ap
   icons+="  "
 done
 
+monitor=$(aerospace list-windows --workspace "$1" --format "%{monitor-appkit-nsscreen-screens-id}")
+
+if [ -z "$monitor" ]; then
+  monitor="1"
+fi
+
 # When icons is empty, set it to " "
 if [ -z "$icons" ]; then
   if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
-    sketchybar --set "$NAME" label="$icons" drawing=on
+    sketchybar --set "$NAME" label="$icons" display="$monitor" drawing=on
   else
     sketchybar --set "$NAME" drawing=off
   fi
 else
-  sketchybar --set "$NAME" label="$icons" drawing=on
+  sketchybar --set "$NAME" label="$icons" display="$monitor" drawing=on
 fi
