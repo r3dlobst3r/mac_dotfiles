@@ -3,37 +3,10 @@
 export PLUGIN_DIR="$CONFIG_DIR/plugins"
 export ITEM_DIR="$CONFIG_DIR/items"
 
-source "$CONFIG_DIR/colors.sh" # Loads all defined colors
+source "$CONFIG_DIR/colors.sh"
 
-sketchybar --bar \
-  position=top \
-  height=37 \
-  margin=12 \
-  y_offset=10 \
-  corner_radius=16 \
-  blur_radius=30 \
-  color=$BAR_COLOR
-
-default=(
-  padding_left=5
-  padding_right=5
-  icon.font="Hack Nerd Font:Bold:17.0"
-  label.font="Hack Nerd Font:Bold:14.0"
-  icon.color="$WHITE"
-  label.color="$WHITE"
-  icon.padding_left=4
-  icon.padding_right=4
-  label.padding_left=4
-  label.padding_right=4
-  background.color="$ITEM_BG_COLOR"
-  background.corner_radius=5
-  background.height=24
-  background.drawing=off
-)
-sketchybar --default "${default[@]}"
-
-# Aerospace
-sketchybar --add event aerospace_workspace_change
+source "$CONFIG_DIR/bar.sh"
+source "$CONFIG_DIR/defaults.sh"
 
 source "$ITEM_DIR/spaces.sh"
 source "$ITEM_DIR/front_app.sh"

@@ -220,7 +220,7 @@ function icon_map() {
   "Music" | "音乐")
     icon_result=":music:"
     ;;
-  "Calendar" | "日历" | "Fantastical" | "Cron" | "Amie")
+  "Calendar" | "日历" | "Fantastical" | "Cron" | "Amie" | "Notion Calendar")
     icon_result=":calendar:"
     ;;
   "Evernote Legacy")

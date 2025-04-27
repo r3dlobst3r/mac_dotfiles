@@ -5,12 +5,12 @@
 source "$CONFIG_DIR/colors.sh"
 
 if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
-  sketchybar --set "$NAME" background.drawing=on \
+  sketchybar --set "$NAME" --animate tanh 30 background.drawing=on \
     background.color="$ACCENT_COLOR" \
     label.color="$BACKGROUND" \
     icon.color="$BACKGROUND"
 else
-  sketchybar --set "$NAME" background.drawing=off \
+  sketchybar --set "$NAME" --animate tanh 30 background.drawing=off \
     label.color="$ACCENT_COLOR" \
     icon.color="$ACCENT_COLOR"
 fi
