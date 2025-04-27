@@ -7,7 +7,10 @@ source "$CONFIG_DIR/colors.sh" # Loads all defined colors
 
 sketchybar --bar \
   position=top \
-  height=40 \
+  height=37 \
+  margin=12 \
+  y_offset=10 \
+  corner_radius=16 \
   blur_radius=30 \
   color=$BAR_COLOR
 

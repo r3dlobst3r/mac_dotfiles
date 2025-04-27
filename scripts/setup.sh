@@ -19,5 +19,8 @@ git clone -b v2.1.2 https://github.com/catppuccin/tmux.git ~/.tmux/plugins/catpp
 # Install Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
+# Sketchybar Font
+curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.16/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
+
 # Setup symlinks for Config
 stow .
