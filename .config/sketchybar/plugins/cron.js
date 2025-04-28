@@ -1,6 +1,6 @@
 #!/opt/homebrew/bin/node
 
-import { createReadStream, rmSync } from "fs";
+import { createReadStream, rmSync, existsSync } from "fs";
 import { createInterface } from "readline";
 import { execSync } from "child_process";
 
@@ -54,8 +54,10 @@ execute(`
 // Extract data from IndexedDB
 const python = execute("python3 -m site --user-base").toString().trim();
 
+const binPath = existsSync(python) ? `${python}/bin/dfindexeddb` : `dfindexeddb`;
+
 execute(`
-  ${python}/bin/dfindexeddb db \
+  ${binPath} db \
     -s "${INDEXDB_LOCATION}/https_calendar.notion.so_0.indexeddb.leveldb" \
     --format chrome \
     --use_manifest \
