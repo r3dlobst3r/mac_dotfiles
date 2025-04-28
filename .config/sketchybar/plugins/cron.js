@@ -102,9 +102,13 @@ rd.on("line", function (line) {
     const duration = (new Date(endTime) - new Date(startTime)) / 1000;
 
     const timeGap = (new Date(startTime) - new Date()) / 1000;
+
+    const isCurrentlyOnGoing =
+      new Date() > new Date(startTime) && new Date() < new Date(endTime);
+
     if (
       !fullDayEvent &&
-      new Date() < new Date(startTime) &&
+      (new Date() < new Date(startTime) || isCurrentlyOnGoing) &&
       timeGap < 60 * 60 * 3 &&
       !Boolean(data.recovered)
     )
@@ -143,7 +147,7 @@ rd.on("close", function () {
   const duration = formatDuration(meeting.duration);
 
   const SKETCHYBAR_COMMAND = `sketchybar --set ${ITEM_NAME} \
-    label="${truncateText(meeting.summary, 15)} (${duration}) in ${timeGap}" \
+    label="${truncateText(meeting.summary, 15)} (${duration})${timeGap === "now" ? "" : " in"} ${timeGap}" \
     ${meeting.meet ? `icon=":zoom:"` : `icon=􀎨`} \
     ${meeting.meet ? `click_script="open -n ${meeting.meet}"` : ``}
   `;
