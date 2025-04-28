@@ -17,7 +17,7 @@ export TRANSPARENT=0x00000000
 # export BACKGROUND=$BAR_COLOR
 
 # -- Gray Scheme --
-# export BAR_COLOR=0xff101314
+export BAR_COLOR=0xff101314
 export BAR_COLOR=0x40000000
 export ITEM_BG_COLOR=0xff353c3f
 export ACCENT_COLOR=0xffffffff
@@ -46,7 +46,6 @@ export BACKGROUND=0xff101314
 # export ITEM_BG_COLOR=0xff008c39
 # export ACCENT_COLOR=0xff1dfca1
 # export BACKGROUND=$BAR_COLOR
-
 
 # -- Orange Scheme --
 # export BAR_COLOR=0xff381c02
