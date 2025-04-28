@@ -23,10 +23,10 @@ const formatDuration = (time) => {
   let duration = time;
   if (duration > 60 * 60) {
     duration = Math.floor(duration / 60 / 60) + "h";
-  } else if (duration > 60) {
+  } else if (duration > 120) {
     duration = Math.floor(duration / 60) + "m";
   } else {
-    duration = duration + "s";
+    duration = "now";
   }
 
   return duration;
