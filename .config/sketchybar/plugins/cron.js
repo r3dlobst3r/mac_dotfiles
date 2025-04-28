@@ -112,13 +112,20 @@ rd.on("line", function (line) {
 
     const timeGap = (new Date(startTime) - new Date()) / 1000;
 
+    const isToStart = new Date() < new Date(startTime);
+
     const isCurrentlyOnGoing =
       new Date() > new Date(startTime) && new Date() < new Date(endTime);
 
+    const isCancelled = data.value.value.status === "cancelled";
+
+    const isWithin3Hours = timeGap < 60 * 60 * 3;
+
     if (
-      (new Date() < new Date(startTime) || isCurrentlyOnGoing) &&
-      timeGap < 60 * 60 * 3 &&
-      !Boolean(data.recovered)
+      (isToStart || isCurrentlyOnGoing) &&
+      isWithin3Hours &&
+      !Boolean(data.recovered) &&
+      !isCancelled
     ) {
       events.push({
         summary,

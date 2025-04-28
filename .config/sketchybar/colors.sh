@@ -4,11 +4,11 @@ export WHITE=0xffffffff
 
 export TRANSPARENT=0x00000000
 
-# -- Transparent Scheme --
-# export BAR_COLOR=0x40000000
-# export ITEM_BG_COLOR=0xfffffff
-# export ACCENT_COLOR=0xffffffff
-# export BACKGROUND=0x00ffffff
+# -- Gruv Box --
+export BAR_COLOR=0x40000000
+export ITEM_BG_COLOR=0xff1d2021
+export ACCENT_COLOR=0xffd79921
+export BACKGROUND=0xff282828
 
 # -- Teal Scheme --
 # export BAR_COLOR=0xff001f30
@@ -16,12 +16,11 @@ export TRANSPARENT=0x00000000
 # export ACCENT_COLOR=0xff2cf9ed
 # export BACKGROUND=$BAR_COLOR
 
-# -- Gray Scheme --
-export BAR_COLOR=0xff101314
-export BAR_COLOR=0x40000000
-export ITEM_BG_COLOR=0xff353c3f
-export ACCENT_COLOR=0xffffffff
-export BACKGROUND=0xff101314
+# -- Transparent Scheme --
+# export BAR_COLOR=0x40000000
+# export ITEM_BG_COLOR=0xff353c3f
+# export ACCENT_COLOR=0xffffffff
+# export BACKGROUND=0xff101314
 
 # -- Purple Scheme --
 # export BAR_COLOR=0xff140c42
