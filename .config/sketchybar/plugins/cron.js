@@ -22,7 +22,8 @@ const execute = (COMMAND) =>
 const formatDuration = (time) => {
   let duration = time;
   if (duration > 60 * 60) {
-    duration = Math.floor(duration / 60 / 60) + "h";
+    duration = Math.floor(duration / 60 / 60);
+    duration = duration + "h " + Math.floor((time - (duration * 60 * 60)) / 60) + "m";
   } else if (duration > 120) {
     duration = Math.floor(duration / 60) + "m";
   } else {
@@ -74,29 +75,13 @@ rd.on("line", function (line) {
   if (data.value?.value?.kind === "calendar#event") {
     const summary = data.value.value.summary;
 
-    let fullDayEvent = false;
+    let startTime = data.value.value.start.dateTime;
+    let endTime = data.value.value.end.dateTime;
 
-    if (!data.value.value.start.dateTime) {
-      data.value.value.start.dateTime = new Date(
-        data.value.value.start.date,
-      ).toISOString();
-      fullDayEvent = true;
+    if (!startTime) {
+      // Don't process full day events
+      return;
     }
-
-    if (!data.value.value.end.dateTime) {
-      data.value.value.end.dateTime = new Date(
-        data.value.value.end.date,
-      ).toISOString();
-    }
-
-    const startTime = data.value.value.start.dateTime.replace(
-      /([+-][0-9][0-9]):([0-9][0-9])$/,
-      "$1$2",
-    );
-    const endTime = data.value.value.end.dateTime.replace(
-      /([+-][0-9][0-9]):([0-9][0-9])$/,
-      "$1$2",
-    );
 
     // Duration by difference of START and END
     const duration = (new Date(endTime) - new Date(startTime)) / 1000;
@@ -107,7 +92,6 @@ rd.on("line", function (line) {
       new Date() > new Date(startTime) && new Date() < new Date(endTime);
 
     if (
-      !fullDayEvent &&
       (new Date() < new Date(startTime) || isCurrentlyOnGoing) &&
       timeGap < 60 * 60 * 3 &&
       !Boolean(data.recovered)
@@ -117,7 +101,6 @@ rd.on("line", function (line) {
         startTime,
         endTime,
         duration,
-        fullDayEvent,
         meet: data.value.value.hangoutLink,
       });
   }
@@ -148,7 +131,7 @@ rd.on("close", function () {
 
   const SKETCHYBAR_COMMAND = `sketchybar --set ${ITEM_NAME} \
     label="${truncateText(meeting.summary, 15)} (${duration})${timeGap === "now" ? "" : " in"} ${timeGap}" \
-    ${meeting.meet ? `icon=":zoom:"` : `icon=􀎨`} \
+    ${meeting.meet ? `icon=` : `icon=󱔠`} \
     ${meeting.meet ? `click_script="open -n ${meeting.meet}"` : ``}
   `;
 

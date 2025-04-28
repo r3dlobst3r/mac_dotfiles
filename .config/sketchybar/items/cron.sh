@@ -5,5 +5,5 @@ sketchybar --add item cron right \
   label="..." \
   display=1 \
   update_freq=120 \
-  icon.font="sketchybar-app-font:Regular:16.0" \
+  icon.font="Hack Nerd Font:Bold:17.0" \
   script="$PLUGIN_DIR/cron.js"
