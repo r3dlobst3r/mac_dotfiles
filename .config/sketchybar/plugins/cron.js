@@ -175,7 +175,7 @@ rd.on("close", function () {
   const durationText = duration === "now" ? "" : ` (${duration})`;
 
   const summary = truncateText(meeting.summary, 15);
-  const remainingTime = timeGap === "now" ? "" : ` in ${timeGap}`;
+  const remainingTime = timeGap === "now" ? " now" : ` in ${timeGap}`;
 
   const label = `${summary}${durationText}${remainingTime}`;
 
