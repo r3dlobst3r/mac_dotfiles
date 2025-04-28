@@ -1,3 +1,6 @@
 [tools]
 go = "1.20.14"
 node = "22"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
