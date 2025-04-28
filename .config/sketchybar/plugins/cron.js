@@ -25,8 +25,14 @@ const formatDuration = (time) => {
   let duration = time;
   if (duration > 60 * 60) {
     duration = Math.floor(duration / 60 / 60);
-    duration =
-      duration + "h " + Math.floor((time - duration * 60 * 60) / 60) + "m";
+
+    const durationInMinutes = Math.floor((time - duration * 60 * 60) / 60);
+
+    if (durationInMinutes > 0) {
+      duration = `${duration}h ${durationInMinutes}m`;
+    } else {
+      duration = `${duration}h`;
+    }
   } else if (duration > 120) {
     duration = Math.floor(duration / 60) + "m";
   } else {
@@ -54,7 +60,9 @@ execute(`
 // Extract data from IndexedDB
 const python = execute("python3 -m site --user-base").toString().trim();
 
-const binPath = existsSync(python) ? `${python}/bin/dfindexeddb` : `dfindexeddb`;
+const binPath = existsSync(python)
+  ? `${python}/bin/dfindexeddb`
+  : `dfindexeddb`;
 
 execute(`
   ${binPath} db \
