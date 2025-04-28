@@ -70,59 +70,74 @@ var rd = createInterface({
 
 const events = [];
 
+const state = {
+  summary: "",
+  startTime: undefined,
+  endTime: undefined,
+  duration: 0,
+  isStaleData: true,
+  isToStart: false,
+  isCurrentlyOnGoing: false,
+  isCancelled: true,
+  isWithin3Hours: false,
+  attendees: [],
+  iAmAttending: false,
+};
+
 rd.on("line", function (line) {
   const data = JSON.parse(line);
 
   if (data.value?.value?.kind === "calendar#event") {
-    const summary = data.value.value?.summary;
+    state.summary = data.value.value?.summary;
 
-    let startTime = data.value.value?.start?.dateTime;
-    let endTime = data.value.value?.end?.dateTime;
+    state.startTime = data.value.value?.start?.dateTime;
+    state.endTime = data.value.value?.end?.dateTime;
 
     // Don't process full day events
-    if (!startTime) {
+    if (!state.startTime) {
       return;
     }
 
-    const isStaleData = Boolean(data.recovered);
+    state.isStaleData = Boolean(data.recovered);
 
-    const timeGap = (new Date(startTime) - new Date()) / 1000;
+    state.isToStart = new Date() < new Date(state.startTime);
 
-    const isToStart = new Date() < new Date(startTime);
+    state.isCurrentlyOnGoing =
+      new Date() > new Date(state.startTime) &&
+      new Date() < new Date(state.endTime);
 
-    const isCurrentlyOnGoing =
-      new Date() > new Date(startTime) && new Date() < new Date(endTime);
+    state.isCancelled = data.value.value.status === "cancelled";
 
-    const isCancelled = data.value.value.status === "cancelled";
+    state.isWithin3Hours =
+      (new Date(state.startTime) - new Date()) / 1000 < 60 * 60 * 3;
 
-    const isWithin3Hours = timeGap < 60 * 60 * 3;
+    state.attendees = data.value.value.attendees?.values || [];
 
-    const attendees = data.value.value.attendees?.values || [];
-
-    const iAmAttending = attendees.some((attendee) => {
+    state.iAmAttending = state.attendees.some((attendee) => {
       return attendee.self && attendee.responseStatus !== "declined";
     });
 
     if (
       // The data is not stale
-      !isStaleData &&
+      !state.isStaleData &&
       // It is within 3 hours from now
-      isWithin3Hours &&
+      state.isWithin3Hours &&
       // The meeting is not cancelled
-      !isCancelled &&
+      !state.isCancelled &&
       // Meeting is to start or is ongoing
-      (isToStart || isCurrentlyOnGoing) &&
+      (state.isToStart || state.isCurrentlyOnGoing) &&
       // I am attending the meeting
-      iAmAttending
+      state.iAmAttending
     ) {
       // Duration by difference of START and END
-      const duration = (new Date(endTime) - new Date(startTime)) / 1000;
+      state.duration =
+        (new Date(state.endTime) - new Date(state.startTime)) / 1000;
 
       events.push({
-        summary,
-        startTime,
-        endTime,
-        duration,
+        summary: state.summary,
+        startTime: state.startTime,
+        endTime: state.endTime,
+        duration: state.duration,
         meet: data.value.value.hangoutLink,
       });
     }
