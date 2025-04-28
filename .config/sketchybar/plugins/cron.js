@@ -6,11 +6,6 @@ import { execSync } from "child_process";
 
 const ITEM_NAME = process.env.NAME;
 
-rmSync("data.json", { force: true });
-
-const INDEXDB_LOCATION =
-  "/Users/manishprivet/Library/Application Support/Notion Calendar/IndexedDB";
-
 const execute = (COMMAND) =>
   execSync(COMMAND, (error) => {
     if (error) {
@@ -19,14 +14,23 @@ const execute = (COMMAND) =>
     }
   });
 
+const JSON_FILE = "cron_data.json";
+
+rmSync(JSON_FILE, { force: true });
+
+const INDEXDB_LOCATION =
+  process.env.HOME + "/Library/Application Support/Notion Calendar/IndexedDB";
+
 const formatDuration = (time) => {
   let duration = time;
   if (duration > 60 * 60) {
-    duration = Math.floor(duration / 60 / 60) + "h";
-  } else if (duration > 60) {
+    duration = Math.floor(duration / 60 / 60);
+    duration =
+      duration + "h " + Math.floor((time - duration * 60 * 60) / 60) + "m";
+  } else if (duration > 120) {
     duration = Math.floor(duration / 60) + "m";
   } else {
-    duration = duration + "s";
+    duration = "now";
   }
 
   return duration;
@@ -41,95 +45,122 @@ const truncateText = (text, length) => {
 };
 
 // Set Status to Loading
+execute(`
+  sketchybar --set ${ITEM_NAME} \
+    icon= \
+    click_script="" \
+`);
 
-const SKETCHYBAR_COMMAND = `sketchybar --set ${ITEM_NAME} \
-  label="..." \
-  icon=󰢠 \
-  click_script="" \
-`;
+// Extract data from IndexedDB
+const python = execute("python3 -m site --user-base").toString().trim();
 
-execute(SKETCHYBAR_COMMAND);
-
-const JSON_EXPORT_COMMAND = `dfindexeddb db \
-  -s "${INDEXDB_LOCATION}/https_calendar.notion.so_0.indexeddb.leveldb" \
-  --format chrome \
-  --use_manifest \
-  -o jsonl \
-  >> data.json`;
-
-execute(JSON_EXPORT_COMMAND);
+execute(`
+  ${python}/bin/dfindexeddb db \
+    -s "${INDEXDB_LOCATION}/https_calendar.notion.so_0.indexeddb.leveldb" \
+    --format chrome \
+    --use_manifest \
+    -o jsonl \
+    >> ${JSON_FILE}
+`);
 
 var rd = createInterface({
-  input: createReadStream(`data.json`),
+  input: createReadStream(JSON_FILE),
   console: false,
 });
 
 const events = [];
 
+const state = {
+  summary: "",
+  startTime: undefined,
+  endTime: undefined,
+  duration: 0,
+  isStaleData: true,
+  isToStart: false,
+  isCurrentlyOnGoing: false,
+  isCancelled: true,
+  isWithin3Hours: false,
+  attendees: [],
+  iAmAttending: false,
+};
+
 rd.on("line", function (line) {
   const data = JSON.parse(line);
 
   if (data.value?.value?.kind === "calendar#event") {
-    const summary = data.value.value.summary;
+    state.summary = data.value.value?.summary;
 
-    let fullDayEvent = false;
+    state.startTime = data.value.value?.start?.dateTime;
+    state.endTime = data.value.value?.end?.dateTime;
 
-    if (!data.value.value.start.dateTime) {
-      data.value.value.start.dateTime = new Date(
-        data.value.value.start.date,
-      ).toISOString();
-      fullDayEvent = true;
+    // Don't process full day events
+    if (!state.startTime) {
+      return;
     }
 
-    if (!data.value.value.end.dateTime) {
-      data.value.value.end.dateTime = new Date(
-        data.value.value.end.date,
-      ).toISOString();
-    }
+    state.isStaleData = Boolean(data.recovered);
 
-    const startTime = data.value.value.start.dateTime.replace(
-      /([+-][0-9][0-9]):([0-9][0-9])$/,
-      "$1$2",
-    );
-    const endTime = data.value.value.end.dateTime.replace(
-      /([+-][0-9][0-9]):([0-9][0-9])$/,
-      "$1$2",
-    );
+    state.isToStart = new Date() < new Date(state.startTime);
 
-    // Duration by difference of START and END
-    const duration = (new Date(endTime) - new Date(startTime)) / 1000;
+    state.isCurrentlyOnGoing =
+      new Date() > new Date(state.startTime) &&
+      new Date() < new Date(state.endTime);
 
-    const timeGap = (new Date(startTime) - new Date()) / 1000;
+    state.isCancelled = data.value.value.status === "cancelled";
+
+    state.isWithin3Hours =
+      (new Date(state.startTime) - new Date()) / 1000 < 60 * 60 * 3;
+
+    state.attendees = data.value.value.attendees?.values || [];
+
+    state.iAmAttending = state.attendees.some((attendee) => {
+      return attendee.self && attendee.responseStatus !== "declined";
+    });
+
     if (
-      !fullDayEvent &&
-      new Date() < new Date(startTime) &&
-      timeGap < 60 * 60 * 3 &&
-      !Boolean(data.recovered)
-    )
+      // The data is not stale
+      !state.isStaleData &&
+      // It is within 3 hours from now
+      state.isWithin3Hours &&
+      // The meeting is not cancelled
+      !state.isCancelled &&
+      // Meeting is to start or is ongoing
+      (state.isToStart || state.isCurrentlyOnGoing) &&
+      // I am attending the meeting
+      state.iAmAttending
+    ) {
+      // Duration by difference of START and END
+      state.duration =
+        (new Date(state.endTime) - new Date(state.startTime)) / 1000;
+
       events.push({
-        summary,
-        startTime,
-        endTime,
-        duration,
-        fullDayEvent,
+        summary: state.summary,
+        startTime: state.startTime,
+        endTime: state.endTime,
+        duration: state.duration,
         meet: data.value.value.hangoutLink,
       });
+    }
   }
 });
 
 rd.on("close", function () {
-  if (events.length === 0) {
-    const SKETCHYBAR_COMMAND = `sketchybar --set ${ITEM_NAME} \
-      label="No upcoming meetings" \
-      icon=󰢠 \
-      click_script="" \
-    `;
-
-    execute(SKETCHYBAR_COMMAND);
+  // Set status to No Meetings if there are no meetings
+  if (!events.length) {
+    execute(`
+      sketchybar --set ${ITEM_NAME} \
+        label="No upcoming meetings" \
+        background.drawing=off \
+        icon.padding_left=0 \
+        label.padding_right=0 \
+        icon=󰢠 \
+        click_script="" \
+    `);
 
     return;
   }
 
+  // Get latest meeting
   const meeting = events.sort((a, b) => {
     return new Date(a.startTime) - new Date(b.startTime);
   })[0];
@@ -140,11 +171,24 @@ rd.on("close", function () {
 
   const duration = formatDuration(meeting.duration);
 
-  const SKETCHYBAR_COMMAND = `sketchybar --set ${ITEM_NAME} \
-    label="${truncateText(meeting.summary, 15)} (${duration}) in ${timeGap}" \
-    ${meeting.meet ? `icon=":zoom:"` : `icon=􀎨`} \
-    ${meeting.meet ? `click_script="open -n ${meeting.meet}"` : ``}
-  `;
+  // If meeting is too short doesn't show duration
+  const durationText = duration === "now" ? "" : ` (${duration})`;
 
-  execute(SKETCHYBAR_COMMAND);
+  const summary = truncateText(meeting.summary, 15);
+  const remainingTime = timeGap === "now" ? " now" : ` in ${timeGap}`;
+
+  const label = `${summary}${durationText}${remainingTime}`;
+
+  const icon = meeting.meet ? "" : "󱔠";
+  const clickScript = meeting.meet ? `open -n "${meeting.meet}"` : "";
+
+  execute(`
+    sketchybar --set ${ITEM_NAME} \
+      background.drawing=on \
+      icon.padding_left=12 \
+      label.padding_right=12 \
+      label="${label}" \
+      click_script="${clickScript}" \
+      icon="${icon}"
+  `);
 });
