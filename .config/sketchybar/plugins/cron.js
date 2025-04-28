@@ -156,7 +156,14 @@ rd.on("close", function () {
 
   const duration = formatDuration(meeting.duration);
 
-  const label = `${truncateText(meeting.summary, 15)} (${duration})${timeGap === "now" ? "" : " in"} ${timeGap}`;
+  // If meeting is too short doesn't show duration
+  const durationText = duration === "now" ? "" : ` (${duration})`;
+
+  const summary = truncateText(meeting.summary, 15);
+  const remainingTime = timeGap === "now" ? "" : ` in ${timeGap}`;
+
+  const label = `${summary}${durationText}${remainingTime}`;
+
   const icon = meeting.meet ? "" : "󱔠";
   const clickScript = meeting.meet ? `open -n "${meeting.meet}"` : "";
 
