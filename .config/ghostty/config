@@ -3,8 +3,8 @@ theme = GruvboxDark
 # background = 282c34
 # foreground= ffffff
 
-background-opacity = 0.95
-background-blur-radius = 10
+background-opacity = 0.75
+background-blur-radius = 20
 
 window-decoration = false
 macos-titlebar-style = hidden

@@ -26,7 +26,7 @@ if [ "$SENDER" == "mouse.exited" ]; then
     background.drawing=off \
     label.color="$ACCENT_COLOR" \
     icon.color="$ACCENT_COLOR" \
-    background.color="$BAR_COLOR"
+    background.color="$TRANSPARENT"
   exit 0
 fi
 
@@ -88,6 +88,6 @@ else
       background.drawing=off \
       label.color="$ACCENT_COLOR" \
       icon.color="$ACCENT_COLOR" \
-      background.color="$BAR_COLOR"
+      background.color="$TRANSPARENT"
   fi
 fi
