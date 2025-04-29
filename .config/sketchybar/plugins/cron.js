@@ -123,9 +123,15 @@ rd.on("line", function (line) {
 
     state.attendees = data.value.value.attendees?.values || [];
 
-    state.iAmAttending = state.attendees.some((attendee) => {
+    state.iAmInAttendees = state.attendees.some((attendee) => {
       return attendee.self && attendee.responseStatus !== "declined";
     });
+
+    state.iAmCreator = data.value.value.creator?.self;
+
+    state.isInMyCalendar = data.value.value.calendarId?.includes("manish");
+
+    state.iAmAttending = (state.iAmInAttendees || state.iAmCreator) && state.isInMyCalendar;
 
     if (
       // The data is not stale
