@@ -2,7 +2,7 @@
 
 music=(
   script="$PLUGIN_DIR/youtube-music.sh"
-  click_script="curl -s -X POST 0.0.0.0:26538/api/v1/toggle-play && $PLUGIN_DIR/youtube-music.sh"
+  click_script="$PLUGIN_DIR/youtube-music.sh"
   label.padding_right=8
   label.font="Hack Nerd Font:Bold:17.0"
   padding_right=0

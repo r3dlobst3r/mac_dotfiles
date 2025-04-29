@@ -1,4 +1,13 @@
 #!/bin/bash
+
+sketchybar --add item aerospace_mode left \
+  --subscribe aerospace_mode aerospace_mode_change \
+  --set aerospace_mode icon="" \
+  script="$CONFIG_DIR/plugins/aerospace_mode.sh" \
+  icon.color="$ACCENT_COLOR" \
+  icon.padding_left=4 \
+  drawing=off
+
 for sid in $(aerospace list-workspaces --all); do
   monitor=$(aerospace list-windows --workspace "$sid" --format "%{monitor-appkit-nsscreen-screens-id}")
 
@@ -34,3 +43,4 @@ sketchybar --add item space_separator left \
   icon.padding_right=7 \
   label.drawing=off \
   background.drawing=off
+
