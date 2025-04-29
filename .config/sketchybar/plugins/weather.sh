@@ -110,7 +110,6 @@ weather_icons_night=(
 )
 
 data=$(curl -s "http://api.weatherapi.com/v1/current.json?key=$API_KEY&q=$LAT,$LONG")
-echo "$data"
 condition=$(echo $data | jq -r '.current.condition.code')
 temp=$(echo $data | jq -r '.current.temp_c')
 feelslike=$(echo $data | jq -r '.current.feelslike_c')

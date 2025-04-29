@@ -7,7 +7,7 @@ if [ "$SENDER" = "volume_change" ]; then
 
 elif command -v betterdisplaycli 2>&1 >/dev/null; then
   if [ "$VOLUME" = "missing value" ]; then
-    VOLUME=$(betterdisplaycli get -ddc -value -vcp=audioSpeakerVolume)
+    VOLUME=$(betterdisplaycli get -ddc -value -vcp=audioSpeakerVolume -displayWithMainStatus)
   fi
 fi
 
