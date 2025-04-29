@@ -16,6 +16,8 @@ elif command -v betterdisplaycli 2>&1 >/dev/null; then
     if [[ $ALTERNATE_VOLUME =~ "." ]]; then
       VOLUME=$(bc -l <<<"${ALTERNATE_VOLUME}*${MEGA}" | bc)
       VOLUME=$(echo "$VOLUME" | cut -d. -f1)
+    elif [ $ALTERNATE_VOLUME = "0" ]; then
+      VOLUME="0"
     fi
 
     MUTE=$(betterdisplaycli get -feature=mute -value -displayWithMainStatus)

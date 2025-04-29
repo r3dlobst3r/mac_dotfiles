@@ -2,5 +2,4 @@
 
 sketchybar --add item volume right \
   --set volume script="$PLUGIN_DIR/volume.sh" \
-  update_freq=10 \
-  --subscribe volume volume_change
+  --subscribe volume volume_change display_volume_change
