@@ -4,7 +4,6 @@ pane_pid=$(tmux display -p "#{pane_pid}")
 
 [ -z "$pane_pid" ] && exit 1 
 
-# Retrieve all descendant processes of the tmux pane's shell by iterating through the process tree.
 # This includes child processes and their descendants recursively.
 descendants=$(ps -eo pid=,ppid=,stat= | awk -v pid="$pane_pid" '{
     if ($3 !~ /^T/) {
