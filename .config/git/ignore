@@ -19,3 +19,5 @@ node_modules
 # System specific
 *~
 .DS_Store
+
+**/.claude/settings.local.json
