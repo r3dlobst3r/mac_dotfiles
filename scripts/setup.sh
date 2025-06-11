@@ -14,13 +14,10 @@ chmod +x ./scripts/fish.sh
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Install tmux theme
-git clone -b v2.1.2 https://github.com/catppuccin/tmux.git ~/.tmux/plugins/catppuccin/tmux
-
-# Install Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+git clone https://github.com/catppuccin/tmux.git ~/.tmux/plugins/catppuccin/tmux
 
 # Sketchybar Font
 curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.16/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
 
 # Setup symlinks for Config
-stow .
+stow . --adopt

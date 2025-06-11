@@ -1,9 +1,9 @@
 #!/bin/zsh
 
 LOCATION=$(shortcuts run getCoreLocationData -o /dev/stdout)
-CITY=$(echo "$LOCATION" | jq -r ".city")
-LAT=$(echo "$LOCATION" | jq -r ".lat")
-LONG=$(echo "$LOCATION" | jq -r ".long")
+CITY=$(echo "$LOCATION" | jq -r ".locality")
+LAT=$(echo "$LOCATION" | jq -r ".latitude")
+LONG=$(echo "$LOCATION" | jq -r ".longitude")
 API_KEY=$(echo $LOCATION | jq -r ".api_key")
 
 # first comment is description, second is icon number
@@ -111,8 +111,8 @@ weather_icons_night=(
 
 data=$(curl -s "http://api.weatherapi.com/v1/current.json?key=$API_KEY&q=$LAT,$LONG")
 condition=$(echo $data | jq -r '.current.condition.code')
-temp=$(echo $data | jq -r '.current.temp_c')
-feelslike=$(echo $data | jq -r '.current.feelslike_c')
+temp=$(echo $data | jq -r '.current.temp_f')
+feelslike=$(echo $data | jq -r '.current.feelslike_f')
 humidity=$(echo $data | jq -r '.current.humidity')
 is_day=$(echo $data | jq -r '.current.is_day')
 
@@ -121,4 +121,5 @@ is_day=$(echo $data | jq -r '.current.is_day')
 sketchybar -m \
   --set weather \
   icon="$icon" \
-  label="${temp}°C, $CITY"
+  label="${temp}°F, $CITY"
+

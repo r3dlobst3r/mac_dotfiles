@@ -2,6 +2,7 @@
 
 # make sure it's executable with:
 # chmod +x ~/.config/sketchybar/plugins/aerospace.sh
+CONFIG_DIR="$HOME/.config/sketchybar"
 source "$CONFIG_DIR/colors.sh"
 
 FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused --format "%{workspace}")
