@@ -51,7 +51,8 @@ symbol = " "
 
 [time]
 disabled = false
-time_format = "%R" # Hour:Minute Format
+time_format = "%l:%M %p" # Hour:Minute Format
+use_12hr = true
 
 [aws]
 disabled = true
